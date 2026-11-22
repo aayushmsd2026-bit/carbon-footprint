@@ -1,8 +1,8 @@
-# 🌱 Six Tonnes in a Valley of Hydropower
+# 🌱 5.8 Tonnes in a Valley of Hydropower
 
 **My Carbon Footprint: a 30-day sustainability challenge.** Fundamentals of Sustainable Development · MSc Sustainable Development, Kathmandu University
 
-An interactive, infographic-style write-up of my 30-day challenge: my WWF India carbon footprint (6.1 t CO₂e/yr), the five lifestyle changes I made, a daily habit tracker, before/after comparison, links to my wider ecological footprint, and my reflection.
+An interactive, infographic-style write-up of my 30-day challenge: my WWF India carbon footprint (5.8 t CO₂e/yr), the five lifestyle changes I made, a daily habit tracker, before/after comparison, links to my wider ecological footprint, and my reflection.
 
 **🔗 Live site:** https://aayushmsd2026-bit.github.io/carbon-footprint/
 

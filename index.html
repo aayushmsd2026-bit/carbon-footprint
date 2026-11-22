@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Six Tonnes in the Valley</title>
+<title>5.8 Tonnes in the Valley</title>
 <meta name="description" content="A 30-day carbon footprint challenge from Kathmandu: measuring, changing and reflecting on my lifestyle's climate and ecological impact.">
 <meta name="color-scheme" content="light">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -82,6 +82,8 @@ nav a.l:hover{color:var(--forest)}
 
 /* habits */
 .habit{position:relative}
+.strength{display:flex;gap:12px;align-items:flex-start;padding:16px 18px}.strength .ic{font-size:24px;line-height:1.2}
+.sched{display:inline-block;font-size:12px;color:var(--muted);margin-top:4px}
 .habit .ic{font-size:34px;line-height:1}
 .habit .tag{position:absolute;top:22px;right:22px;font-size:12px;background:var(--mint);color:var(--forest);padding:3px 10px;border-radius:99px;font-weight:600}
 .habit dt{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--faint);margin-top:12px}
@@ -108,6 +110,13 @@ input[type=range]{width:100%;accent-color:var(--forest-2);margin:6px 0 0}
 .tgrid .hd{font-size:11px;color:var(--faint);text-align:center;font-variant-numeric:tabular-nums}
 .tgrid .rl{font-size:13px;white-space:nowrap;padding-right:8px}
 .cell{aspect-ratio:1;border-radius:5px;background:#ece7dd;border:0;padding:0;cursor:default}
+.cell.off{background:transparent;border:1px dashed #e4ded2;cursor:default!important}
+.plan{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:12px}
+.plan .wk{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--forest-2);border-radius:var(--r);padding:16px 18px}
+.plan .wk.now{border-top-color:var(--before)}
+.plan .wk ul{margin:8px 0 0;padding-left:18px;font-size:13.5px;color:var(--muted)}
+.plan .wk li{margin-bottom:4px}
+.prompt{border:2px dashed var(--line);background:transparent}
 .cell.on{background:var(--forest-2)}
 .cell.future{background:repeating-linear-gradient(135deg,#f1ede5 0 3px,#e8e2d7 3px 5px)}
 .cell.today{outline:2px solid var(--before);outline-offset:1px}
@@ -169,7 +178,7 @@ footer{padding:40px 0 60px;border-top:1px solid var(--line);font-size:14px;color
 <body>
 <div class="flags" aria-hidden="true"></div>
 <nav><div class="wrap">
-  <a class="brand" href="#top">🌱 Six Tonnes</a>
+  <a class="brand" href="#top">🌱 5.8 Tonnes</a>
   <a class="l" href="#footprint">1 · Footprint</a>
   <a class="l" href="#challenge">2 · Challenge</a>
   <a class="l" href="#journal">3 · 30 days</a>
@@ -182,7 +191,7 @@ footer{padding:40px 0 60px;border-top:1px solid var(--line);font-size:14px;color
 <header class="hero" id="top">
   <div class="wrap">
     <div class="eyebrow">A 30-day sustainability challenge · Kathmandu</div>
-    <h1>Six tonnes in a valley of <em>hydropower</em></h1>
+    <h1>5.8 tonnes in a valley of <em>hydropower</em></h1>
     <p class="lede">I measured my carbon footprint, changed five everyday habits for thirty days, and asked a harder question: what does my lifestyle demand of the land, water and forests beyond the number?</p>
     <div class="meta" id="meta"></div>
     <div class="bignums">
@@ -203,7 +212,7 @@ footer{padding:40px 0 60px;border-top:1px solid var(--line);font-size:14px;color
 <!-- ============ STEP 1 ============ -->
 <section id="footprint"><div class="wrap">
   <div class="eyebrow"><b>Step 1</b> Discover my footprint</div>
-  <h2>Where my 6.1 tonnes come from</h2>
+  <h2 id="s1-title">Where my tonnes come from</h2>
   <p class="lede">Result from the WWF India Carbon Footprint Calculator on <span class="d-initial"></span>. Two categories — what I eat and how my household runs — make up three-quarters of the total.</p>
 
   <div class="grid g2" style="margin-top:34px">
@@ -211,7 +220,7 @@ footer{padding:40px 0 60px;border-top:1px solid var(--line);font-size:14px;color
       <h3>Breakdown by category</h3>
       <p class="tiny">tonnes CO₂e per year · hover a bar for its share</p>
       <div class="bars" id="breakdown" style="margin-top:18px"></div>
-      <p class="tiny" style="margin-top:14px">Categories sum to 6.2 t; the calculator's 6.1 t total reflects rounding of each category.</p>
+      <p class="tiny" style="margin-top:14px" id="sumnote"></p>
     </div>
     <div class="card reveal">
       <h3>In context</h3>
@@ -227,12 +236,14 @@ footer{padding:40px 0 60px;border-top:1px solid var(--line);font-size:14px;color
   <div class="grid g2" style="margin-top:18px">
     <div class="callout reveal">
       <h3>🔍 Reading the number critically</h3>
-      <p class="small">The calculator was built for India, where each kWh of grid electricity emits roughly <b>0.7 kg CO₂</b> (mostly coal). Nepal’s grid is almost entirely hydropower — about <b>0.02–0.03 kg</b> per kWh across its life cycle, with some imports from India in the dry season. So my <b>0.5 t “Energy”</b> is likely an overestimate. My real levers are even more clearly <b>food, cooking fuel (100% imported LPG) and consumption.</b></p>
+      <p class="small"><b>Data quality matters.</b> My first attempt gave <b>6.1 t</b>. Re-entering my household (4 of us, not our tenants) and our electricity more carefully gave <b>5.8 t</b>, mostly through Energy (0.5 → 0.3 t) and Office (0.4 → 0.2 t).</p>
+      <p class="small"><b>The tool is Indian.</b> It assumes coal-heavy grid power (≈0.7 kg CO₂/kWh). Nepal’s grid is mostly hydropower (≈0.02–0.03 kg across its life cycle, plus some dry-season imports). And <b>Food at 2.5 t</b> looks high for my modest diet: my own estimate from Poore &amp; Nemecek (2018) factors is closer to <b>≈1.2 t</b>, suggesting the calculator treats any non-veg diet coarsely.</p>
       <div class="bars" id="grid" style="margin-top:10px"></div>
     </div>
     <div class="callout reveal" style="border-color:var(--forest-2);background:var(--mint)">
       <h3>🧭 What this told me about my lifestyle</h3>
-      <p class="small">I expected transport to dominate. It is only <b>11%</b>. The things I never thought of as “climate decisions” — <b>dal or meat, a pressure cooker or an open pot, a plastic bag or a jhola</b> — are where most of my footprint sits. Nepal’s per-person average is tiny, but an urban, middle-class lifestyle in Kathmandu is not: my number sits <b>above the global average</b>.</p>
+      <p class="small">I ride the bus, compost and heat water with the sun, yet my number sits <b>above the global average</b>. <b>Food and Household make up ≈78%</b> of my footprint, while transport is just 12%. The choices I never thought of as “climate decisions” matter most: <b>mutton or dal, rice or dhido, LPG or induction, a new gadget or none</b>.</p>
+      <p class="small">The calculator’s own advice agreed: <b>“Reduce meat consumption by 1–2 days per week”</b> (High priority) and <b>“share resources among the people living in the household”</b>.</p>
     </div>
   </div>
 </div></section>
@@ -241,8 +252,11 @@ footer{padding:40px 0 60px;border-top:1px solid var(--line);font-size:14px;color
 <section id="challenge"><div class="wrap">
   <div class="eyebrow"><b>Step 2</b> Choose my challenge</div>
   <h2>Five changes, aimed at the biggest slices</h2>
-  <p class="lede">Each change targets a category from my result and is realistic for a student living with family in the valley. Small, consistent and measurable beat dramatic and abandoned.</p>
-  <div class="grid g3" id="habits" style="margin-top:34px"></div>
+  <p class="lede">I didn’t pick generic tips. I started from what I <b>already do right</b>, then aimed each change at what’s left: my plate, my kitchen, my shopping and our water. Each one fits my real week (office Sunday–Friday, family meals at home).</p>
+  <h3 style="margin-top:34px">✅ Already part of my life</h3>
+  <div class="grid" id="strengths" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))" style="margin-top:12px"></div>
+  <h3 style="margin-top:44px">🎯 The five changes</h3>
+  <div class="grid g3" id="habits" style="margin-top:12px"></div>
 
   <div style="margin-top:70px" id="sim">
     <h3 style="font-size:28px">What could these changes add up to?</h3>
@@ -253,21 +267,21 @@ footer{padding:40px 0 60px;border-top:1px solid var(--line);font-size:14px;color
         <div class="small" style="opacity:.8">Estimated saving per year</div>
         <div class="big"><span id="s-total">0</span> <span style="font-size:24px">kg CO₂e</span></div>
         <div class="minibar"><div id="s-bar"></div></div>
-        <div class="tiny" style="color:#cfe9dc;margin-bottom:12px"><span id="s-pct">0</span>% of my 6.1 t footprint</div>
+        <div class="tiny" style="color:#cfe9dc;margin-bottom:12px"><span id="s-pct">0</span>% of my <span class="t-initial"></span> t footprint</div>
         <div id="s-rows"></div>
-        <div class="row"><span>Projected footprint</span><b id="s-new">6.1 t</b></div>
+        <div class="row"><span>Projected footprint</span><b id="s-new"></b></div>
         <div class="row"><span>Saved during the 30 days</span><b id="s-30">0 kg</b></div>
-        <p class="tiny" style="color:#cfe9dc;margin:10px 0 0">≈ the CO₂ absorbed by <b id="s-trees">0</b> mature trees in a year (≈ 21 kg each).</p>
+        <div class="row"><span>💧 Tanker water saved / yr</span><b id="s-water"></b></div>
+        <p class="tiny" style="color:#cfe9dc;margin:10px 0 0">≈ the CO₂ absorbed by <b id="s-trees">0</b> mature trees in a year (≈ 21 kg each). Water saving barely registers as carbon, which is exactly why it belongs in the ecological footprint.</p>
       </div>
     </div>
     <details class="small muted" style="margin-top:16px"><summary style="cursor:pointer">Method notes & emission factors</summary>
       <ul>
-        <li><b>Meat-free day:</b> ≈ 1.5 kg CO₂e saved per meat meal replaced by pulses — a weighted mix of chicken, buff and mutton servings (~100 g) vs. dal, from Poore & Nemecek (2018) global medians.</li>
-        <li><b>Walk / bus:</b> ≈ 0.06 kg CO₂e per km avoided on a petrol motorbike / ride-hail (fuel ~45 km/L × 2.3 kg CO₂/L, plus vehicle life cycle); walking ≈ 0, electric bus ≈ 0 on hydropower.</li>
-        <li><b>Electricity:</b> 0.72 kg CO₂/kWh — the Indian grid factor the calculator uses. On Nepal’s hydro grid the real saving is far smaller.</li>
-        <li><b>LPG:</b> one 14.2 kg cylinder ≈ 42 kg CO₂ (2.98 kg CO₂/kg LPG).</li>
-        <li><b>Food waste:</b> ≈ 2.5 kg CO₂e per kg of food not wasted (FAO, 2013 global wastage footprint ÷ wasted mass).</li>
-        <li><b>Plastic:</b> ≈ 0.05 kg CO₂e per bag/bottle avoided — deliberately shown to prove a point: plastic matters for land and rivers far more than for carbon.</li>
+        <li><b>Mutton meal swapped:</b> ≈4.8 kg CO₂e (120 g mutton × 39.7 kg CO₂e/kg, minus a pulse curry). <b>Chicken meal:</b> ≈1.2 kg (120 g × 9.9). Global medians from Poore &amp; Nemecek (2018).</li>
+        <li><b>Dhido/roti instead of rice:</b> ≈0.43 kg per dinner (150 g rice at 4.45 kg CO₂e/kg vs millet/wheat at ≈1.6). Paddy methane drives the difference.</li>
+        <li><b>Induction instead of LPG:</b> assumes our family uses ≈1 cylinder every 6 weeks (≈92 kg CO₂ per person a year, at 2.98 kg CO₂/kg LPG). Moving cooking to induction saves ≈80% of that on Nepal’s mostly-hydro grid.</li>
+        <li><b>New item not bought:</b> ≈10 kg CO₂e each, a conservative average for a clothing item or small online order (a laptop is ≈200–350 kg).</li>
+        <li><b>Water:</b> shown in litres and tankers (≈10,000 L each) rather than CO₂, because its main impact is on groundwater, not the atmosphere.</li>
       </ul>
     </details>
   </div>
@@ -278,9 +292,12 @@ footer{padding:40px 0 60px;border-top:1px solid var(--line);font-size:14px;color
   <div class="eyebrow"><b>Step 3</b> Put it into action</div>
   <h2>Thirty days, one square at a time</h2>
   <p class="lede" id="journal-lede">Every square is one day. Filled = I kept the habit. This grid is my evidence of consistency — gaps included.</p>
-  <div class="card" style="margin-top:30px">
+  <h3 style="margin-top:34px">🗓️ The 30-day plan</h3>
+  <div class="plan" id="plan"></div>
+  <h3 style="margin-top:44px">✅ The tracker</h3>
+  <div class="card" style="margin-top:12px">
     <div class="tracker"><div class="tgrid" id="tgrid"></div></div>
-    <div class="legend"><span><i style="background:var(--forest-2)"></i>Kept</span><span><i style="background:#ece7dd"></i>Missed</span><span><i style="background:repeating-linear-gradient(135deg,#f1ede5 0 3px,#e8e2d7 3px 5px)"></i>Upcoming</span><span><i style="background:#fff;outline:2px solid var(--before)"></i>Today</span></div>
+    <div class="legend"><span><i style="background:var(--forest-2)"></i>Kept</span><span><i style="background:#ece7dd"></i>Missed</span><span><i style="background:repeating-linear-gradient(135deg,#f1ede5 0 3px,#e8e2d7 3px 5px)"></i>Upcoming</span><span><i style="background:transparent;border:1px solid var(--line)"></i>Not scheduled</span><span><i style="background:#fff;outline:2px solid var(--before)"></i>Today</span></div>
     <div class="editbar">
       <span class="small" style="margin-right:auto">✏️ <b>Edit mode.</b> Tap squares to tick habits (saved in this browser). Then copy the log into <code>data.js</code> so everyone sees it.</span>
       <button class="btn" id="copylog">Copy log</button>
@@ -310,8 +327,8 @@ footer{padding:40px 0 60px;border-top:1px solid var(--line);font-size:14px;color
   <div class="grid g2 eco" id="eco" style="margin-top:30px"></div>
   <div class="grid g3" style="margin-top:18px">
     <div class="card reveal"><div class="stat">1.7</div><p class="small muted" style="margin:6px 0 0">Earths — roughly how many humanity currently uses each year, by Global Footprint Network estimates. We are drawing down nature’s capital, not living on its interest.</p></div>
-    <div class="card reveal"><div class="stat">&gt;½</div><p class="small muted" style="margin:6px 0 0">of Kathmandu’s municipal solid waste is organic — compostable material that instead takes up landfill space and emits methane.</p></div>
-    <div class="card reveal"><div class="stat">&lt;1%</div><p class="small muted" style="margin:6px 0 0">of my carbon footprint is saved by refusing ~15 plastic items a week (≈ 39 kg CO₂e/yr) — yet plastic is one of my most visible pressures on land and rivers. What we don’t measure, we don’t manage.</p></div>
+    <div class="card reveal"><div class="stat">≈0.25 t</div><p class="small muted" style="margin:6px 0 0">CO₂e a year from my one mutton meal a week, close to my own estimate for a whole year of bus commuting. Dal Wednesday removes it.</p></div>
+    <div class="card reveal"><div class="stat">0.0 t</div><p class="small muted" style="margin:6px 0 0">is what water adds to my carbon footprint. Yet our tanker draws on a valley aquifer that is falling year after year. What we don’t measure, we don’t manage.</p></div>
   </div>
   <div class="keep reveal" style="margin-top:50px" id="keep"></div>
 </div></section>
@@ -399,6 +416,9 @@ function bars(el, rows, max, opts = {}) {
 /* ---------- step 1 ---------- */
 const cats = Object.entries(S.initial.categories).sort((a, b) => b[1] - a[1]);
 const sum = cats.reduce((s, c) => s + c[1], 0);
+$('#s1-title').textContent = `Where my ${S.initial.total.toFixed(1)} tonnes come from`;
+$('#sumnote').textContent = Math.abs(sum - S.initial.total) > 0.05 ? `Categories sum to ${sum.toFixed(1)} t; the calculator's ${S.initial.total.toFixed(1)} t total reflects rounding of each category.` : '';
+document.querySelectorAll('.t-initial').forEach(e => e.textContent = S.initial.total.toFixed(1));
 bars($('#breakdown'), cats.map(([k, v]) => ({label: k, value: v, tip: `<b>${k}</b>: ${v.toFixed(1)} t · ${Math.round(v / sum * 100)}% of total`, text: `${v.toFixed(1)} t`})), cats[0][1]);
 const ctx = [{label: 'Me', value: S.initial.total, cls: 'me', hl: true, tip: 'My WWF result'}]
   .concat(S.benchmarks.map(b => ({label: b.label, value: b.value, cls: 'ghost', tip: esc(b.note)})))
@@ -413,10 +433,13 @@ bars($('#grid'), [
 ], 0.75);
 
 /* ---------- step 2 ---------- */
+const WD = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const schedTxt = h => h.days ? 'Every ' + h.days.map(d => WD[d]).join(' & ') : 'Every day';
+$('#strengths').innerHTML = (S.strengths || []).map(x => `<div class="card strength reveal"><span class="ic">${x.icon}</span><span class="small">${esc(x.text)}</span></div>`).join('');
 $('#habits').innerHTML = S.habits.map((h, i) => `
   <article class="card habit reveal">
     <div class="ic">${h.icon}</div><span class="tag">${esc(h.target)}</span>
-    <h3 style="margin-top:14px">${i + 1}. ${esc(h.title)}</h3>
+    <h3 style="margin-top:14px">${i + 1}. ${esc(h.title)}</h3><span class="sched">📅 ${schedTxt(h)}</span>
     <dl><dt>Why</dt><dd>${esc(h.why)}</dd><dt>How I implemented it</dt><dd>${esc(h.how)}</dd></dl>
   </article>`).join('') + `
   <article class="card habit reveal" style="background:var(--mint);border-color:#cfe0d5">
@@ -424,39 +447,45 @@ $('#habits').innerHTML = S.habits.map((h, i) => `
     <h3 style="margin-top:14px">How I kept myself honest</h3>
     <dl><dt>Daily</dt><dd>Ticked each habit on the 30-day grid below every night — misses included.</dd>
     <dt>Every few days</dt><dd>A short diary note and a photo as evidence.</dd>
-    <dt>Day 30</dt><dd>Re-ran the WWF calculator with the same household size and assumptions, so the comparison is fair.</dd></dl>
+    <dt>Day 30</dt><dd>Re-run the WWF calculator with the same household size and assumptions, so the comparison is fair.</dd></dl>
   </article>`;
 
 const SL = [
-  {id: 'meat', label: '🥗 Meat-free days per week', min: 0, max: 7, step: 1, v: 3, unit: 'days', f: v => v * 1.5 * 52},
-  {id: 'move', label: '🚶 Motorbike / ride-hail km replaced per week', min: 0, max: 100, step: 5, v: 25, unit: 'km', f: v => v * 0.06 * 52},
-  {id: 'power', label: '🔌 Electricity saved per month', min: 0, max: 40, step: 1, v: 8, unit: 'kWh', f: v => v * 12 * 0.72},
-  {id: 'lpg', label: '🔥 LPG cylinders saved per year', min: 0, max: 4, step: 0.5, v: 1, unit: 'cyl.', f: v => v * 42.3},
-  {id: 'waste', label: '🍚 Food waste avoided per week', min: 0, max: 5, step: 0.5, v: 1, unit: 'kg', f: v => v * 2.5 * 52},
-  {id: 'plastic', label: '🛍️ Plastic bags / bottles refused per week', min: 0, max: 40, step: 1, v: 15, unit: 'items', f: v => v * 0.05 * 52}
+  {id: 'mutton', label: '🫘 Mutton meals swapped for dal / week', min: 0, max: 2, step: 1, v: 1, unit: 'meals', f: v => v * 4.8 * 52},
+  {id: 'chicken', label: '🥬 Chicken meals swapped for veg / week', min: 0, max: 3, step: 1, v: 1, unit: 'meals', f: v => v * 1.2 * 52},
+  {id: 'dhido', label: '🌾 Rice dinners → dhido / roti per week', min: 0, max: 7, step: 1, v: 2, unit: 'dinners', f: v => v * 0.43 * 52},
+  {id: 'cook', label: '🍳 Share of cooking moved from LPG to induction', min: 0, max: 100, step: 10, v: 50, unit: '%', f: v => v / 100 * 92 * 0.8},
+  {id: 'buy', label: '🛍️ New items / online orders not bought per month', min: 0, max: 4, step: 1, v: 1, unit: 'items', f: v => v * 10 * 12},
+  {id: 'water', label: '🪣 Household water saved per day', min: 0, max: 200, step: 10, v: 60, unit: 'L', f: v => 0, water: true}
 ];
 $('#sliders').innerHTML = SL.map(s => `
   <div class="slider"><label for="r-${s.id}">${s.label}<output id="o-${s.id}"></output></label>
   <input type="range" id="r-${s.id}" min="${s.min}" max="${s.max}" step="${s.step}" value="${s.v}">
-  <div class="hint" id="h-${s.id}"></div></div>`).join('') + '<p class="tiny" style="margin:0">Defaults = the targets I set for my own challenge.</p>';
+  <div class="hint" id="h-${s.id}"></div></div>`).join('') + '<p class="tiny" style="margin:0">Defaults = the targets in my plan.</p>';
 function sim() {
-  let tot = 0, rows = '';
+  let tot = 0;
   SL.forEach(s => {
     const v = +$('#r-' + s.id).value, kg = s.f(v); tot += kg;
-    $('#o-' + s.id).textContent = `${v} ${s.unit}`;
-    $('#h-' + s.id).textContent = `≈ ${Math.round(kg)} kg CO₂e / year`;
+    $('#o-' + s.id).textContent = `${v} ${v === 1 ? s.unit.replace(/s$/, '') : s.unit}`;
+    $('#h-' + s.id).textContent = s.water ? `≈ ${Math.round(v * 365 / 1000)} m³ (${(v * 365 / 10000).toFixed(1)} tankers) a year · carbon ≈ 0` : `≈ ${Math.round(kg)} kg CO₂e / year`;
   });
-  const pct = tot / (S.initial.total * 1000) * 100;
+  const pct = tot / (S.initial.total * 1000) * 100, wl = +$('#r-water').value * 365;
   $('#s-total').textContent = Math.round(tot).toLocaleString();
   $('#s-pct').textContent = pct.toFixed(1);
   $('#s-bar').style.width = Math.min(100, pct * 3) + '%';
   $('#s-new').textContent = (S.initial.total - tot / 1000).toFixed(2) + ' t';
   $('#s-30').textContent = Math.round(tot / 365 * 30) + ' kg';
   $('#s-trees').textContent = Math.round(tot / 21);
+  $('#s-water').textContent = `${(wl / 1000).toFixed(0)} m³ · ≈${(wl / 10000).toFixed(1)} tankers`;
 }
 SL.forEach(s => $('#r-' + s.id).addEventListener('input', sim)); sim();
 
-/* ---------- step 3 · tracker ---------- */
+/* ---------- step 3 · plan + tracker ---------- */
+$('#plan').innerHTML = (S.plan || []).map(w => {
+  return `<div class="wk reveal"><div class="tiny" style="text-transform:uppercase;letter-spacing:.08em">${esc(w.range)}</div><h3 style="font-size:17px;margin:4px 0 0">${esc(w.title)}</h3><ul>${w.items.map(i => `<li>${esc(i)}</li>`).join('')}</ul></div>`;
+}).join('');
+const dow = iso => new Date(iso + 'T00:00:00').getDay();
+const sched = (hb, d) => !hb.days || hb.days.includes(dow(d));
 const LKEY = 'cf-log-v1';
 let local = {}; try { local = JSON.parse(localStorage.getItem(LKEY) || '{}'); } catch (e) {}
 const log = () => { const m = JSON.parse(JSON.stringify(S.log || {})); if (EDIT) for (const d in local) m[d] = Object.assign(m[d] || {}, local[d]); return m; };
@@ -471,6 +500,7 @@ function drawTracker() {
     h += `<div class="rl">${hb.icon} ${esc(hb.short)}</div>`;
     days.forEach(d => {
       const on = L[d] && L[d][hb.id]; const fut = d > todayISO;
+      if (!sched(hb, d) && !on) { h += `<span class="cell off" data-tip="${esc(hb.short)} · ${fmtDate(d)}<br>not scheduled (${WD[dow(d)]})"></span>`; return; }
       if (!fut) past++; if (on) kept++;
       h += `<button class="cell ${on ? 'on' : ''} ${fut && !on ? 'future' : ''} ${d === todayISO ? 'today' : ''}" data-d="${d}" data-h="${hb.id}" aria-label="${esc(hb.short)} ${fmtDate(d)}: ${on ? 'kept' : fut ? 'upcoming' : 'missed'}" data-tip="${esc(hb.short)} · ${fmtDate(d)}<br>${on ? '✅ kept' : fut ? 'upcoming' : '— missed'}"></button>`;
     });
@@ -479,9 +509,9 @@ function drawTracker() {
     h += `<div class="pct">${past ? pct + '%' : '–'}</div>`;
   });
   g.innerHTML = h;
-  $('#streaks').innerHTML = stats.map(s => `<div class="card small"><b>${s.hb.icon} ${esc(s.hb.short)}</b><br><span class="muted">${s.kept} of ${s.past} days so far</span></div>`).join('');
+  $('#streaks').innerHTML = stats.map(s => `<div class="card small"><b>${s.hb.icon} ${esc(s.hb.short)}</b><br><span class="muted">${s.kept} of ${s.past} scheduled days so far · ${schedTxt(s.hb)}</span></div>`).join('');
   const done = days.filter(d => d <= todayISO).length;
-  $('#journal-lede').innerHTML = `Every square is one day from <b>${fmtDate(days[0])}</b> to <b>${fmtDate(days[days.length - 1])}</b>. Filled = I kept the habit. ` + (done ? `Day <b>${Math.min(done, days.length)}</b> of ${days.length}.` : `The challenge starts tomorrow.`);
+  $('#journal-lede').innerHTML = `Every square is one day from <b>${fmtDate(days[0])}</b> to <b>${fmtDate(days[days.length - 1])}</b>. Filled = I kept the habit; dashed = not scheduled that day (meat swaps only on Wed &amp; Fri, dhido on Tue &amp; Sat). ` + (done ? `Day <b>${Math.min(done, days.length)}</b> of ${days.length}.` : `The challenge starts tomorrow.`);
 }
 $('#tgrid').addEventListener('click', e => {
   const c = e.target.closest('.cell'); if (!EDIT || !c) return;
@@ -499,10 +529,12 @@ $('#copylog').onclick = () => {
 $('#clearlog').onclick = () => { if (confirm('Clear ticks saved in this browser?')) { local = {}; try { localStorage.removeItem(LKEY); } catch (e) {} drawTracker(); } };
 drawTracker();
 
-$('#diary').innerHTML = (S.diary && S.diary.length) ? S.diary.map(d => `
+const realDiary = (S.diary || []).slice().sort((a, b) => a.date < b.date ? -1 : 1);
+const pending = (S.diaryPrompts || []).filter(p => !realDiary.some(d => d.date === p.date));
+$('#diary').innerHTML = realDiary.map(d => `
   <article class="card reveal">${d.photo ? `<img src="${esc(d.photo)}" alt="${esc(d.title)}" loading="lazy">` : ''}
   <div class="date">Day ${days.indexOf(d.date) + 1 || '–'} · ${fmtDate(d.date)}</div><h3 style="margin-top:6px">${esc(d.title)}</h3><p class="small muted" style="margin:0">${esc(d.text)}</p></article>`).join('')
-  : `<div class="empty" style="grid-column:1/-1">📓 Diary entries and photos from the 30 days will appear here — the walk to class, the compost bucket, the jhola at the tarkari pasal.</div>`;
+  + pending.map(p => `<article class="card prompt reveal"><div class="date">Day ${days.indexOf(p.date) + 1 || '–'} · ${fmtDate(p.date)} · ${p.date > todayISO ? 'coming up' : 'to write'}</div><p class="small muted" style="margin:6px 0 0">📝 ${esc(p.prompt)}</p></article>`).join('');
 
 /* ---------- step 4 · compare ---------- */
 const F = S.final;
@@ -545,6 +577,7 @@ $('#wc').innerHTML = `<span class="pill">${words} words${todos.length ? ' (excl.
 
 /* ---------- evidence ---------- */
 const shots = S.initial.screenshots.map((s, i) => ({src: s, cap: `Initial WWF result · ${fmtDate(S.initial.date)} · page ${i + 1}`}))
+  .concat(S.firstAttempt ? S.firstAttempt.screenshots.map(s => ({src: s, cap: `First attempt (${S.firstAttempt.total.toFixed(1)} t, inputs later corrected)`})) : [])
   .concat(F && F.screenshots ? F.screenshots.map((s, i) => ({src: s, cap: `Final WWF result · ${fmtDate(F.date)}${F.screenshots.length > 1 ? ' · page ' + (i + 1) : ''}`})) : [])
   .concat((S.diary || []).filter(d => d.photo).map(d => ({src: d.photo, cap: d.title})));
 $('#shots').innerHTML = shots.map(s => `<figure style="margin:0"><a href="${esc(s.src)}" target="_blank" rel="noopener"><img src="${esc(s.src)}" alt="${esc(s.cap)}" loading="lazy"><figcaption>${esc(s.cap)}</figcaption></a></figure>`).join('')
